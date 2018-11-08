@@ -9,17 +9,6 @@ price = value_array[10]
 df = df/(df.max()-df.min())
 # print(df.head(5))
 
-def MSE(y,y_pred):
-    #y is a list
-    ans = 0
-    for j in range(len(y)):
-        ans += abs(y[j] - y_pred[j][0])**2
-        # ans = ans/len(X_test)
-    ans = ( ans / len(y)**2 )
-    print('MSE:',ans)
-    print('Length of Y',len(y))
-    print('-'*10)
-    return ans
 
 def MAPE(y,y_pred):
     a = 0
@@ -82,7 +71,7 @@ y = Y_test.tolist()
 
 RR(y,y_pred)
 MAPE(y,y_pred)
-MSE(y,y_pred)
+
 y = np.multiply(y,price)
 y_pred = np.multiply(y_pred,price)
 import matplotlib.pyplot as plt
