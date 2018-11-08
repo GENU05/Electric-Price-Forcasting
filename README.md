@@ -2,7 +2,7 @@
 
 Base journal  -  https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7778265
 
-Addtional Paper on IEEE paper https://ieeexplore.ieee.org/document/5589959/citations#citation
+Addtional Paper on IEEE paper https://ieeexplore.ieee.org/document/6725869
 
 Dataset Acquired From - https://github.com/vcelloho/Research/tree/master/EISPC/Data/Load%20Data/NEPOOL
 
