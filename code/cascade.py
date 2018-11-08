@@ -59,15 +59,15 @@ Y=df.iloc[:,10]
 # print(X.head(10))
 # print(Y.head(5))
 
-X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=1000) 
+X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42) 
 
 def build_model():
     dense_input = Input(shape=(10,))
     dense_vector = BatchNormalization()(dense_input)
     print(dense_vector)
     Dense(6,kernel_initializer=initializers.RandomNormal(stddev=0.001))(dense_vector)
-    Dense(7)(dense_vector)
-    Dense(8)(dense_vector)
+    Dense(7,kernel_initializer=initializers.RandomNormal(stddev=0.001))(dense_vector)
+    Dense(8,kernel_initializer=initializers.RandomNormal(stddev=0.001))(dense_vector)
     # Dense(17)(dense_vector)
 
     output = Dense(1)(dense_vector)
@@ -75,7 +75,7 @@ def build_model():
     return model
 
 model = build_model()
-model.compile(loss="mean_absolute_percentage_error", optimizer="adam", metrics=['accuracy'])
+model.compile(loss="mean_absolute_percentage_error", optimizer="sgd", metrics=['accuracy'])
 model.fit([X_train.values], Y_train.values, epochs=10, batch_size=10)
 y_pred = model.predict([X_test]) 
 y = Y_test.tolist() 
