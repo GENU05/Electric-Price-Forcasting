@@ -1,10 +1,10 @@
 import pandas as pd 
-df = pd.read_csv('Datasets/newcreate.csv')
+df = pd.read_csv('Datasets/newcreate.csv')  #Reading CSV
 # print(df.head(5))
 # df = df.drop(['Date','DA_CC','RT_CC','DewPnt','SYSLoad'],axis=1)
-price_back = (df.max()-df.min())
+price_back = (df.max()-df.min())        #Normalize data 0-1
 value_array = price_back.values 
-price = value_array[10]
+price = value_array[10]         #To get actual values of Price in CSV
 #Normalization of data
 df = df/(df.max()-df.min())
 # print(df.head(5))
@@ -75,8 +75,8 @@ MAPE(y,y_pred)
 y = np.multiply(y,price)
 y_pred = np.multiply(y_pred,price)
 import matplotlib.pyplot as plt
-plt.plot(y[:31],color='red')
-plt.plot(y_pred[:31])
+plt.plot(y[:31],color='red')        # Red IS actual 
+plt.plot(y_pred[:31])       # Predicted
 # plt.axis([0, 6, 0, 20])
 plt.show()
     

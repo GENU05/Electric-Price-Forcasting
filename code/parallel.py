@@ -64,7 +64,7 @@ def build_model():
 model = build_model()
 ada_grad = Adagrad(lr=0.07, epsilon=1e-06, decay=0.0)
 model.compile(loss="mean_absolute_percentage_error", optimizer=ada_grad, metrics=['accuracy'])
-model.fit([X_train.values]*3, Y_train.values, epochs=50, batch_size=10)
+model.fit([X_train.values]*3, Y_train.values, epochs=10, batch_size=10)
 y_pred = model.predict([X_test]*3) 
 y = Y_test.tolist() 
 
