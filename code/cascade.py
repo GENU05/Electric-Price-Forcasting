@@ -1,20 +1,20 @@
 import pandas as pd 
-df = pd.read_csv('Datasets/newcreate.csv')  #Reading CSV
-# print(df.head(5))
-# df = df.drop(['Date','DA_CC','RT_CC','DewPnt','SYSLoad'],axis=1)
+from sklearn.model_selection import train_test_split
+import numpy as np
+from keras.models import Sequential , Model 
+from keras.layers import *
+from keras.layers.normalization import BatchNormalization
+
+df = pd.read_csv('Datasets/NEPOOL.csv')  #Reading CSV
 price_back = (df.max()-df.min())        #Normalize data 0-1
 value_array = price_back.values 
-price = value_array[10]         #To get actual values of Price in CSV
-#Normalization of data
+price = value_array[10]     
 df = df/(df.max()-df.min())
-# print(df.head(5))
-
 
 def MAPE(y,y_pred):
     a = 0
     for j in range(len(y)):
         a += abs((y[j] - y_pred[j][0])/y[j])
-        # print(y[j]*price,'::::',y_pred[j][0]*price)
     a = a*100/len(y)
     print('MAPE:',a)
     return a 
@@ -31,22 +31,12 @@ def RR(y,y_pred):
     print('R^2:',p/q)
     return p/q
 
-# from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-
-import numpy as np
-from keras.models import Sequential , Model 
-from keras.layers import *
-
-from keras.layers.normalization import BatchNormalization
 np.random.seed(7)
 
 from keras import initializers
 
 X=df.drop(['RegCP'],axis=1)
 Y=df.iloc[:,10] 
-# print(X.head(10))
-# print(Y.head(5))
 
 X_train,X_test,Y_train,Y_test=train_test_split(X,Y,test_size=0.2,random_state=42) 
 
@@ -57,8 +47,6 @@ def build_model():
     Dense(6,kernel_initializer=initializers.RandomNormal(stddev=0.001))(dense_vector)
     Dense(7,kernel_initializer=initializers.RandomNormal(stddev=0.001))(dense_vector)
     Dense(8,kernel_initializer=initializers.RandomNormal(stddev=0.001))(dense_vector)
-    # Dense(17)(dense_vector)
-
     output = Dense(1)(dense_vector)
     model = Model(inputs=[dense_input], outputs=output)
     return model
@@ -74,17 +62,7 @@ MAPE(y,y_pred)
 
 y = np.multiply(y,price)
 y_pred = np.multiply(y_pred,price)
-import matplotlib.pyplot as plt
-plt.plot(y[:31],color='red')        # Red IS actual 
-plt.plot(y_pred[:31])       # Predicted
-# plt.axis([0, 6, 0, 20])
-plt.show()
-    
-
-
-# ----Ploting----
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt    
 plt.plot(y,color='red')
 plt.plot(y_pred)
-# plt.axis([0, 6, 0, 20])
 plt.show()

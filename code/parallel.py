@@ -7,10 +7,7 @@ from keras.layers import *
 from keras.layers.normalization import BatchNormalization
 
 
-df = pd.read_csv('Datasets/newcreate.csv')
-# print(df.head(5))
-# df = df.drop(['Date'],axis=1)
-# print(df.head(5))
+df = pd.read_csv('Datasets/NEPOOL.csv')
 
 
 def MAPE(y,y_pred):
@@ -76,7 +73,6 @@ MAPE(y,y_pred)
 import matplotlib.pyplot as plt
 plt.plot(y,color='red')
 plt.plot(y_pred)
-# plt.axis([0, 6, 0, 20])
 plt.show()
 
 

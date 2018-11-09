@@ -1,9 +1,13 @@
 import pandas as pd 
-df = pd.read_csv('Datasets/newcreate.csv')
-# print(df.head(5))
-# df = df.drop(['Date'],axis=1)
-# print(df.head(5))
+from sklearn.model_selection import train_test_split
+import numpy as np
+from keras.models import Sequential , Model 
+from keras.layers import *
+from keras.layers.normalization import BatchNormalization
+import matplotlib.pyplot as plt
 
+
+df = pd.read_csv('Datasets/NEPOOL.csv')
 
 def MAPE(y,y_pred):
     a = 0
@@ -25,14 +29,6 @@ def RR(y,y_pred):
     print('R^2:',p/q)
     return p/q
 
-# from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-
-import numpy as np
-from keras.models import Sequential , Model 
-from keras.layers import *
-
-from keras.layers.normalization import BatchNormalization
 np.random.seed(7)
 
 
@@ -86,7 +82,6 @@ RR(y,y_pred)
 MAPE(y,y_pred)
     
 # ----Ploting----
-import matplotlib.pyplot as plt
 plt.plot(y,color='red')
 plt.plot(y_pred)
 # plt.axis([0, 6, 0, 20])
